@@ -1,4 +1,4 @@
-<p align="center" style="font-size:5em">
+<p align="center" style="font-size:5rem">
     <a href="https://expressjs.com/" target="blank">Express JS</a>
 </p>
 <p align="center">
