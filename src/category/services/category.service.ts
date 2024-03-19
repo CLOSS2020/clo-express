@@ -1,7 +1,7 @@
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { BaseService } from '../../config/base.service';
-import { CategoryDTO } from '../models/dto/category.dto';
-import { UpdateCategoryDTO } from '../models/dto/update-category.dto';
+import { Category } from '../models/dto/category.interface';
+import { UpdateCategory } from '../models/dto/update-category.dto';
 import { CategoryEntity } from '../models/entities/category.entity';
 
 export class CategoryService extends BaseService<CategoryEntity> {
@@ -25,13 +25,13 @@ export class CategoryService extends BaseService<CategoryEntity> {
       .getOne();
   }
 
-  async createCategory(body: CategoryDTO): Promise<CategoryEntity> {
+  async createCategory(body: Category): Promise<CategoryEntity> {
     return (await this.execRepository).save(body);
   }
 
   async updateCategory(
     id: string,
-    body: UpdateCategoryDTO,
+    body: UpdateCategory,
   ): Promise<UpdateResult> {
     return (await this.execRepository).update(id, body);
   }

@@ -1,6 +1,9 @@
+import { NextFunction, Request, Response } from 'express';
 import { BaseRouter } from '../../shared/router/router';
 import { ProductController } from '../controllers/product.controller';
 import { ProductMiddleware } from '../middlewares/product.middleware';
+import { validateProductRequest } from '../config/product.validation';
+import { validateUpdateProductRequest } from '../config/update-product.validation';
 
 export class ProductRouter extends BaseRouter<
   ProductController,
@@ -25,18 +28,20 @@ export class ProductRouter extends BaseRouter<
 
     this.router.post(
       '/products/create',
-      (req, res, next) => [
+      validateProductRequest,
+      (req: Request, res: Response, next: NextFunction) => [
         this.middleware.createProductValidator(req, res, next),
       ],
-      (req, res) => this.controller.createProduct(req, res),
+      (req: Request, res: Response) => this.controller.createProduct(req, res),
     );
 
     this.router.patch(
       '/products/update/:id',
-      (req, res, next) => [
+      validateUpdateProductRequest,
+      (req: Request, res: Response, next: NextFunction) => [
         this.middleware.updateProductValidator(req, res, next),
       ],
-      (req, res) => this.controller.updateProduct(req, res),
+      (req: Request, res: Response) => this.controller.updateProduct(req, res),
     );
 
     this.router.delete('/products/delete/:id', (req, res) =>

@@ -16,10 +16,10 @@ export abstract class BaseEntity {
   createdAt: Date;
 
   @UpdateDateColumn({
-    name: 'updated_at',
+    name: 'fechamodifi',
     type: 'timestamp',
   })
-  updatedAt: Date;
+  fechamodifi: Date;
 
   @DeleteDateColumn({
     name: 'deleted_at',

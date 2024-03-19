@@ -1,4 +1,4 @@
-import { RoleType } from '../../user/models/dto/user.dto';
+import { RoleType } from '../../user/models/enums/role-type.enum';
 
 export interface PayloadToken {
   role: RoleType;

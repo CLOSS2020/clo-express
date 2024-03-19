@@ -1,34 +1,48 @@
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, Index, OneToOne, UpdateDateColumn } from 'typeorm';
 import { BaseEntity } from '../../../config/base.entity';
-import { CustomerEntity } from '../../../customer/models/entities/customer.entity';
-import { RoleType } from '../dto/user.dto';
+import { RoleType } from '../enums/role-type.enum';
 
-@Entity({ name: 'user' })
+@Entity({ name: 'usuarios' })
 export class UserEntity extends BaseEntity {
-  @Column()
-  name: string;
+  @Column({ length: 30, default: '' })
+  nombre: string;
 
-  @Column()
-  lastname: string;
-
-  @Column()
+  @Column({ length: 30, default: '' })
   username: string;
 
-  @Column()
-  email: string;
-
-  @Column({ select: false })
+  @Column({ default: '' })
   password: string;
 
-  @Column()
-  city: string;
+  @Column({ length: 30, default: '' })
+  @Index('vendedor')
+  vendedor: string;
 
-  @Column()
-  province: string;
+  @Column({ length: 2, default: '' })
+  almacen: string;
 
-  @Column({ type: 'enum', enum: RoleType, nullable: false })
+  @Column({ type: 'decimal', precision: 2, scale: 0, default: 0 })
+  desactivo: number;
+
+  @Column({ type: 'decimal', precision: 4, scale: 0 })
+  ualterprec: number;
+
+  @UpdateDateColumn()
+  sesionactiva: Date;
+
+  @Column({ length: 30, default: '1.0.0' })
+  version: string;
+
+  @Column({ default: 0 })
+  sesion: number;
+
+  @Column({
+    type: 'enum',
+    enum: RoleType,
+    nullable: false,
+    default: RoleType.USER,
+  })
   role: RoleType;
 
-  @OneToOne(() => CustomerEntity, (customer) => customer.user)
-  customer: CustomerEntity;
+  // @OneToOne(() => CustomerEntity, (customer) => customer.user)
+  // customer: CustomerEntity;
 }

@@ -1,9 +1,10 @@
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { BaseService } from '../../config/base.service';
-import { RoleType, UserDTO } from '../models/dto/user.dto';
 import { UserEntity } from '../models/entities/user.entity';
-import { UpdateUserDTO } from '../models/dto/update-user.dto';
+import { UpdateUser } from '../models/interfaces/update-user.interface';
 import * as bcrypt from 'bcrypt';
+import { RoleType } from '../models/enums/role-type.enum';
+import { User } from '../models/interfaces/user.interface';
 
 export class UserService extends BaseService<UserEntity> {
   constructor() {
@@ -55,7 +56,7 @@ export class UserService extends BaseService<UserEntity> {
       .getOne();
   }
 
-  async createUser(body: UserDTO): Promise<UserEntity> {
+  async createUser(body: User): Promise<UserEntity> {
     const newUser = (await this.execRepository).create(body);
     const hash = await bcrypt.hash(newUser.password, 10);
 
@@ -65,10 +66,7 @@ export class UserService extends BaseService<UserEntity> {
     return (await this.execRepository).save(newUser);
   }
 
-  async updateUser(
-    id: string,
-    updateDto: UpdateUserDTO,
-  ): Promise<UpdateResult> {
+  async updateUser(id: string, updateDto: UpdateUser): Promise<UpdateResult> {
     return (await this.execRepository).update(id, updateDto);
   }
 

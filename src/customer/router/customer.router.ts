@@ -1,6 +1,9 @@
+import { NextFunction, Request, Response } from 'express';
 import { BaseRouter } from '../../shared/router/router';
 import { CustomerController } from '../controllers/customer.controller';
 import { CustomerMiddleware } from '../middlewares/customer.middleware';
+import { validateCustomerRequest } from '../config/customer.validation';
+import { validateUpdateCustomerRequest } from '../config/update-customer.validation';
 
 export class CustomerRouter extends BaseRouter<
   CustomerController,
@@ -25,18 +28,20 @@ export class CustomerRouter extends BaseRouter<
 
     this.router.post(
       '/customers/create',
-      (req, res, next) => [
+      validateCustomerRequest,
+      (req: Request, res: Response, next: NextFunction) => [
         this.middleware.createCustomerValidator(req, res, next),
       ],
-      (req, res) => this.controller.createCustomer(req, res),
+      (req: Request, res: Response) => this.controller.createCustomer(req, res),
     );
 
     this.router.patch(
       '/customers/update/:id',
-      (req, res, next) => [
+      validateUpdateCustomerRequest,
+      (req: Request, res: Response, next: NextFunction) => [
         this.middleware.updateCustomerValidator(req, res, next),
       ],
-      (req, res) => this.controller.updateCustomer(req, res),
+      (req: Request, res: Response) => this.controller.updateCustomer(req, res),
     );
 
     this.router.delete('/customers/delete/:id', (req, res) =>

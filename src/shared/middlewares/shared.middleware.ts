@@ -2,7 +2,8 @@ import passport from 'passport';
 import { HttpResponse } from '../response/http.response';
 import { NextFunction, Request, Response } from 'express';
 import { UserEntity } from '../../user/models/entities/user.entity';
-import { RoleType } from '../../user/models/dto/user.dto';
+import { validationResult } from 'express-validator';
+import { RoleType } from '../../user/models/enums/role-type.enum';
 
 export class SharedMiddleware {
   constructor(public httpResponse: HttpResponse = new HttpResponse()) {}
@@ -22,5 +23,19 @@ export class SharedMiddleware {
     }
 
     return next();
+  }
+
+  async handleValidationErrors(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return this.httpResponse.BadRequest(res, errors.array());
+    }
+
+    next();
   }
 }

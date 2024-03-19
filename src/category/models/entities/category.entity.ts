@@ -1,12 +1,11 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { BaseEntity } from '../../../config/base.entity';
-import { ProductEntity } from '../../../product/models/entities/product.entity';
 
-@Entity({ name: 'category' })
+@Entity({ name: 'categorias' })
 export class CategoryEntity extends BaseEntity {
-  @Column()
-  categoryName: string;
+  @Column({ length: 30, default: '' })
+  nombre: string;
 
-  @OneToMany(() => ProductEntity, (product) => product.category)
-  products: ProductEntity[];
+  // @OneToMany(() => ProductEntity, (product) => product.category)
+  // products: ProductEntity[];
 }

@@ -43,6 +43,8 @@ npm run m:run
 
 > Este ejecutara la migración y creara la base de datos o los cambios hechos en la migración.
 
+NOTA IMPORTANTE: En caso de que haya un error luego de la migración eliminar la carpeta <b>dist</b>
+
 ## Ejecutar la app
 
 <p style="font-size:1.2em">

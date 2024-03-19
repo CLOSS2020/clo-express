@@ -1,8 +1,8 @@
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { BaseService } from '../../config/base.service';
+import { Customer } from '../models/interfaces/customer.interface';
+import { UpdateCustomer } from '../models/interfaces/update-customer.interface';
 import { CustomerEntity } from '../models/entities/customer.entity';
-import { CustomerDTO } from '../models/dto/customer.dto';
-import { UpdateCustomerDTO } from '../models/dto/update-customer.dto';
 
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor() {
@@ -29,13 +29,13 @@ export class CustomerService extends BaseService<CustomerEntity> {
       .getOne();
   }
 
-  async createCustomer(body: CustomerDTO): Promise<CustomerEntity> {
+  async createCustomer(body: Customer): Promise<CustomerEntity> {
     return (await this.execRepository).save(body);
   }
 
   async updateCustomer(
     id: string,
-    body: UpdateCustomerDTO,
+    body: UpdateCustomer,
   ): Promise<UpdateResult> {
     return (await this.execRepository).update(id, body);
   }

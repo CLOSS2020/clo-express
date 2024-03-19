@@ -1,6 +1,9 @@
+import { NextFunction, Request, Response } from 'express';
 import { BaseRouter } from '../../shared/router/router';
 import { UserController } from '../controllers/user.controller';
 import { UserMiddleware } from '../middlewares/user.middleware';
+import { validateUserRequest } from '../config/user.validation';
+import { validateUpdateUserRequest } from '../config/update-user.validation';
 
 export class UserRouter extends BaseRouter<UserController, UserMiddleware> {
   constructor() {
@@ -20,14 +23,20 @@ export class UserRouter extends BaseRouter<UserController, UserMiddleware> {
 
     this.router.post(
       '/users/create',
-      (req, res, next) => [this.middleware.createUserValidator(req, res, next)],
-      (req, res) => this.controller.createUser(req, res),
+      validateUserRequest,
+      (req: Request, res: Response, next: NextFunction) => [
+        this.middleware.validateUserRequest(req, res, next),
+      ],
+      (req: Request, res: Response) => this.controller.createUser(req, res),
     );
 
     this.router.patch(
       '/users/update/:id',
-      (req, res, next) => [this.middleware.updateUserValidator(req, res, next)],
-      (req, res) => this.controller.updateUser(req, res),
+      validateUpdateUserRequest,
+      (req: Request, res: Response, next: NextFunction) => [
+        this.middleware.updateUserValidator(req, res, next),
+      ],
+      (req: Request, res: Response) => this.controller.updateUser(req, res),
     );
 
     this.router.delete(

@@ -1,7 +1,3 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
-
-export class UpdateCategoryDTO {
-  @IsOptional()
-  @IsString()
-  categoryName?: string;
+export interface UpdateCategory {
+  nombre?: string;
 }

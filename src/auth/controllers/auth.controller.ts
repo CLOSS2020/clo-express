@@ -14,7 +14,7 @@ export class AuthController extends AuthService {
     try {
       const userEncode = req.user as UserEntity;
       const encode = await this.generateJWT(userEncode);
-      
+
       if (!encode) {
         return this.httpResponse.Unauthorized(
           res,

@@ -1,6 +1,9 @@
+import { NextFunction, Request, Response } from 'express';
 import { BaseRouter } from '../../shared/router/router';
+import { validateUpdateCategoryRequest } from '../config/update-category.validation';
 import { CategoryController } from '../controllers/category.controller';
 import { CategoryMiddleware } from '../middlewares/category.middleware';
+import { validateCategoryRequest } from './../config/category.validation';
 
 export class CategoryRouter extends BaseRouter<
   CategoryController,
@@ -25,18 +28,20 @@ export class CategoryRouter extends BaseRouter<
 
     this.router.post(
       '/categories/create',
-      (req, res, next) => [
+      validateCategoryRequest,
+      (req: Request, res: Response, next: NextFunction) => [
         this.middleware.createCategoryValidator(req, res, next),
       ],
-      (req, res) => this.controller.createCategory(req, res),
+      (req: Request, res: Response) => this.controller.createCategory(req, res),
     );
 
     this.router.patch(
       '/categories/update/:id',
-      (req, res, next) => [
+      validateUpdateCategoryRequest,
+      (req: Request, res: Response, next: NextFunction) => [
         this.middleware.updateCategoryValidator(req, res, next),
       ],
-      (req, res) => this.controller.updateCategory(req, res),
+      (req: Request, res: Response) => this.controller.updateCategory(req, res),
     );
 
     this.router.delete('/categories/delete/:id', (req, res) =>
