@@ -1,4 +1,4 @@
-export class UpdatePedido {
+export interface UpdatePedido {
   kti_ndoc?: string;
   kti_tdoc?: string;
   kti_codcli?: string;

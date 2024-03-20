@@ -53,8 +53,25 @@ export class PedidoController {
     }
   }
 
+  async createPedidoApp(req: Request, res: Response) {
+    try {
+      const data = await this.pedidoService.createPedidoApp(req.body);
+      return this.httpResponse.estado(res, data);
+    } catch (error) {
+      return this.httpResponse.Error(res, error);
+    }
+  }
+
   async createPedido(req: Request, res: Response) {
     try {
+      const validate = await this.pedidoService.findExistingPedido(
+        req.body.kti_ndoc,
+      );
+
+      if (validate) {
+        return this.httpResponse.BadRequest(res, 'This order already exists');
+      }
+
       const data = await this.pedidoService.createPedido(req.body);
       return this.httpResponse.Ok(res, data);
     } catch (error) {
@@ -65,6 +82,14 @@ export class PedidoController {
   async updatePedido(req: Request, res: Response) {
     const { id } = req.params;
     try {
+      const validate = await this.pedidoService.findExistingPedido(
+        req.body.kti_ndoc,
+      );
+
+      if (!validate) {
+        return this.httpResponse.BadRequest(res, "This order doesn't exists");
+      }
+
       const data: UpdateResult = await this.pedidoService.updatePedido(
         id,
         req.body,

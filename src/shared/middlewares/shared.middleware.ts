@@ -29,7 +29,7 @@ export class SharedMiddleware {
     req: Request,
     res: Response,
     next: NextFunction,
-  ) {
+  ) {    
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

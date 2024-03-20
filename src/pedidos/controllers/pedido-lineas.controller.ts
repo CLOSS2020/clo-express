@@ -57,6 +57,9 @@ export class PedidoLineasController {
   async createPedidoLineas(req: Request, res: Response) {
     try {
       const data = await this.pedidoLineasService.createPedidoLineas(req.body);
+
+      
+
       return this.httpResponse.Ok(res, data);
     } catch (error) {
       return this.httpResponse.Error(res, error);

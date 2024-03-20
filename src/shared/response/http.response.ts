@@ -11,6 +11,18 @@ export enum HttpStatus {
 }
 
 export class HttpResponse {
+  estado(
+    res: Response,
+    data?: {
+      estado: {
+        correlativo: string;
+        status: number;
+      }[];
+    },
+  ) {
+    return res.json(data);
+  }
+
   Ok(res: Response, data?: any): Response {
     return res.status(HttpStatus.OK).json({
       status: HttpStatus.OK,

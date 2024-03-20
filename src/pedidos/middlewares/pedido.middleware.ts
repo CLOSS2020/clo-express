@@ -6,6 +6,10 @@ export class PedidoMiddleware extends SharedMiddleware {
     super();
   }
 
+  createPedidoAppValidator(req: Request, res: Response, next: NextFunction) {
+    this.handleValidationErrors(req, res, next);
+  }
+
   createPedidoValidator(req: Request, res: Response, next: NextFunction) {
     this.handleValidationErrors(req, res, next);
   }

@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm';
+import { Column, CreateDateColumn, Entity } from 'typeorm';
 import { BaseEntity } from '../../../config/base.entity';
 
 @Entity({ name: 'cliempre' })
@@ -83,6 +83,9 @@ export class CustomerEntity extends BaseEntity {
 
   @Column({ type: 'decimal', precision: 20, scale: 6, default: 0.0 })
   limcred: number;
+
+  @CreateDateColumn()
+  fchcrea: Date;
 
   @Column({ default: 0 })
   dolarflete: number;
