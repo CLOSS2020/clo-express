@@ -57,6 +57,11 @@ export class PedidoService extends BaseService<PedidoEntity> {
           correlativo: cabecera.kti_ndoc,
           status: 111,
         });
+      } else {
+        estado.push({
+          correlativo: cabecera.kti_ndoc,
+          status: 200,
+        });
       }
 
       for (const linea of lineas) {
@@ -79,10 +84,6 @@ export class PedidoService extends BaseService<PedidoEntity> {
             });
           } else {
             (await this.execRepository).save(cabecera);
-            estado.push({
-              correlativo: cabecera.kti_ndoc,
-              status: 200,
-            });
             await this.pedidoLineasService.createPedidoLineas(linea);
           }
         }

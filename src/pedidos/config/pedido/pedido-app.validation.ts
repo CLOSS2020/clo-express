@@ -76,24 +76,16 @@ const pedidoAppSchema = checkSchema(
         errorMessage: 'kti_status must be a string',
       },
     },
-    'Pedido.*.Cabecera.kti_nroped': {
-      exists: { errorMessage: 'kti_nroped is required' },
+    'Pedido.*.Cabecera.kti_fchdoc': {
+      exists: { errorMessage: 'kti_fchdoc is required' },
       isString: {
-        errorMessage: 'kti_nroped must be a string',
+        errorMessage: 'kti_fchdoc must be a string',
       },
     },
     'Pedido.*.Cabecera.kti_negesp': {
       exists: { errorMessage: 'kti_negesp is required' },
       isString: {
         errorMessage: 'kti_negesp must be a string',
-      },
-    },
-    'Pedido.*.Cabecera.ke_pedstatus': {
-      exists: {
-        errorMessage: 'ke_pedstatus is required',
-      },
-      isString: {
-        errorMessage: 'ke_pedstatus must be a string',
       },
     },
     'Pedido.*.Cabecera.dolarflete': {

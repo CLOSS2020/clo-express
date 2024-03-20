@@ -16,6 +16,7 @@ import { PedidoRouter } from './pedidos/routers/pedido.router';
 class ServerBootstrap extends ConfigServer {
   public app: express.Application = express();
   private port: number = this.getNumberEnv('PORT');
+  private host: string = this.getEnviroment('HOST') ?? '';
 
   constructor() {
     super();
@@ -56,9 +57,9 @@ class ServerBootstrap extends ConfigServer {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
+    this.app.listen(this.port, this.host, () => {
       console.log(`
-      [server]: Server is running at ${this.port}
+      [server]: Server is running at http://${this.host}:${this.port}
       `);
     });
   }

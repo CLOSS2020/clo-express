@@ -29,10 +29,12 @@ export class SharedMiddleware {
     req: Request,
     res: Response,
     next: NextFunction,
-  ) {    
+  ) {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+      console.log('VALIDATION ERRORS', errors.array());
+
       return this.httpResponse.BadRequest(res, errors.array());
     }
 

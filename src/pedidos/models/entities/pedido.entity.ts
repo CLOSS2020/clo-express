@@ -38,6 +38,9 @@ export class PedidoEntity extends BaseEntity {
   @Column({ length: 8, default: '' })
   kti_nroped: string;
 
+  @Column({ type: 'datetime', default: '0001-01-01 01:01:01' })
+  kti_fchdoc: Date;
+
   @Column({ type: 'char', length: 2, default: '0' })
   kti_negesp: string;
 
