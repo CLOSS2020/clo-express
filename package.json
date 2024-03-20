@@ -1,7 +1,7 @@
 {
-  "name": "ecommerce-server",
+  "name": "clo-server",
   "version": "1.0.0",
-  "description": "Express API",
+  "description": "CLO Express API",
   "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

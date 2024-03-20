@@ -28,6 +28,9 @@ class ServerBootstrap extends ConfigServer {
     this.app.use(cors());
 
     this.app.use('/api', this.routers());
+    this.app.get('health', (_req, res) => {
+      res.status(200).json({ message: 'Health is ok!' });
+    });
     this.listen();
   }
 
