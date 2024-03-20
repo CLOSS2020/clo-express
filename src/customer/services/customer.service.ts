@@ -18,15 +18,17 @@ export class CustomerService extends BaseService<CustomerEntity> {
   }
 
   async findCustomerWithRelation(id: string): Promise<CustomerEntity | null> {
-    return (await this.execRepository)
-      .createQueryBuilder('customer')
-      // .leftJoinAndSelect('customer.user', 'user')
-      // .leftJoinAndSelect('customer.purchases', 'purchase')
-      // .leftJoinAndSelect('purchase.purchaseProduct', 'purchases_products')
-      // .leftJoinAndSelect('purchases_products.product', 'product')
-      // .leftJoinAndSelect('product.category', 'category')
-      .where({ id })
-      .getOne();
+    return (
+      (await this.execRepository)
+        .createQueryBuilder('customer')
+        // .leftJoinAndSelect('customer.user', 'user')
+        // .leftJoinAndSelect('customer.purchases', 'purchase')
+        // .leftJoinAndSelect('purchase.purchaseProduct', 'purchases_products')
+        // .leftJoinAndSelect('purchases_products.product', 'product')
+        // .leftJoinAndSelect('product.category', 'category')
+        .where({ id })
+        .getOne()
+    );
   }
 
   async createCustomer(body: Customer): Promise<CustomerEntity> {

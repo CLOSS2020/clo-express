@@ -12,7 +12,7 @@ export abstract class ConfigServer {
   }
 
   public getEnviroment(k: string): string | undefined {
-    return process.env[k];
+    return String(process.env[k]);
   }
 
   public getNumberEnv(k: string): number {

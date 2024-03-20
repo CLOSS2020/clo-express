@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { UserRouter } from './user/router/user.router';
@@ -28,8 +28,8 @@ class ServerBootstrap extends ConfigServer {
     this.app.use(cors());
 
     this.app.use('/api', this.routers());
-    this.app.get('health', (_req, res) => {
-      res.status(200).json({ message: 'Health is ok!' });
+    this.app.use('/health', async (_req: Request, res: Response) => {
+      res.status(200).send({ message: 'Health is OK!' });
     });
     this.listen();
   }

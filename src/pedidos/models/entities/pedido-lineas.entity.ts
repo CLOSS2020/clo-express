@@ -6,7 +6,7 @@ export class PedidoLineasEntity extends BaseEntity {
   @Column({ length: 8, default: '' })
   kti_tdoc: string;
 
-  @Column({ length: 17, default: ''})
+  @Column({ length: 17, default: '' })
   kti_ndoc: string;
 
   @Column({ type: 'decimal', precision: 2, scale: 0, default: 0 })

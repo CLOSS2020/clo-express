@@ -16,7 +16,7 @@ interface Cabecera {
   kti_totneto: number;
   kti_status: string;
   kti_nroped: string;
-  kti_fchdoc: Date
+  kti_fchdoc: Date;
   kti_negesp: string;
   ke_pedstatus: string;
   dolarflete: number;
